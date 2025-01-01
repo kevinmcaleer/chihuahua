@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from kivy.logger import Logger
 from kivy.clock import Clock
 
+Logger.setLevel("INFO")
+
 class ChartWidget(BoxLayout):
     mqtt_server = StringProperty("192.168.1.152")  # MQTT broker address
     mqtt_topic = StringProperty("/home/loft")  # Default MQTT topic

@@ -33,6 +33,13 @@
             background_color: 1, 1, 1, 0  # Fully transparent background
             background_normal: ''  # Remove the default button background image
         Button:
+            text: 'Weather'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'weather'
+            background_color: 1, 1, 1, 0  # Fully transparent background
+            background_normal: ''  # Remove the default button background image
+        Button:
             text: 'Quit'
             background_color: 1, 1, 1, 0  # Fully transparent background
             background_normal: ''  # Remove the default button background image
@@ -74,3 +81,19 @@
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
+<WeatherScreen>:
+    BoxLayout:
+        Gauge:
+            title: 'Loft'
+            mqtt_server: '192.168.1.152'
+            mqtt_topic: "/home/loft"
+            min_range: 0
+            max_range: 40
+        NewsWidget:
+            rss_url: "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml"  # Example RSS feed
+        Button:
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+            
