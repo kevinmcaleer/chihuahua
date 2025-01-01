@@ -1,0 +1,76 @@
+# app.kv
+
+<MenuScreen>:
+    Image:
+        source: 'background.jpg'
+            
+    BoxLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'this on top'
+            ClockWidget:
+                time_font_size: 200
+                date_font_size: 1000
+                color: 1,0,0
+        Button:
+            text: 'Goto settings'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'settings'
+            background_color: 1, 1, 1, 0  # Fully transparent background
+            background_normal: ''  # Remove the default button background image
+        ChartWidget:
+            mqtt_server: '192.168.1.152'
+            mqtt_topic: "/home/loft"
+            min_range: 0
+            max_range: 40
+        Button:
+            text: 'Test page'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'test'
+            background_color: 1, 1, 1, 0  # Fully transparent background
+            background_normal: ''  # Remove the default button background image
+        Button:
+            text: 'Quit'
+            background_color: 1, 1, 1, 0  # Fully transparent background
+            background_normal: ''  # Remove the default button background image
+            on_press: app.stop()
+                    
+<SettingsScreen>:
+    BoxLayout:
+        ClockWidget:
+            time_font_size: 120
+            date_font_size: 120
+        Button:
+            text: 'My settings button'
+        Button:
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+<TestScreen>:
+    GridLayout:
+        size_hint: .9, .9
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        rows:1
+        Label:
+            text: "I don't suffer from insanity, I enjoy every minute of it"
+            text_size: self.width-20, self.height-20
+            valign: 'top'
+        Label:
+            text: "When I was born I was so surprised; I didn't speak for a year and a half."
+            text_size: self.width-20, self.height-20
+            valign: 'middle'
+            halign: 'center'
+        Label:
+            text: "A consultant is someone who takes a subject you understand and makes it sound confusing"
+            text_size: self.width-20, self.height-20
+            valign: 'bottom'
+            halign: 'justify'
+        Button:
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
