@@ -32,7 +32,7 @@ class NewsWidget(BoxLayout):
             feed = feedparser.parse(self.rss_url)
             # feed = feedparser.parse(self.rss_url, request_kwargs={'verify': False})
 
-            print(f"Feed: {feed}")
+            # print(f"Feed: {feed}")
             self.headlines = [entry.title for entry in feed.entries[:5]]  # Get top 5 headlines
             Logger.info(f"Fetched {len(self.headlines)} headlines from {self.rss_url}")
             print(self.headlines)

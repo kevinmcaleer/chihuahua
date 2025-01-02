@@ -6,6 +6,7 @@ from chart import ChartWidget
 from gauge import Gauge
 from news import NewsWidget
 from kivy.logger import Logger
+from weather import WeatherWidget
 import logging
 
 Logger.setLevel(level='INFO')  # Set the log level to INFO

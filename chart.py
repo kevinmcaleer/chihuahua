@@ -2,11 +2,12 @@ import paho.mqtt.client as mqtt
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty, NumericProperty, ListProperty
 from kivy_garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
-import matplotlib.pyplot as plt
 from kivy.logger import Logger
 from kivy.clock import Clock
-
-Logger.setLevel("INFO")
+Logger.setLevel("ERROR")
+import matplotlib.pyplot as plt
+import logging
+logging.getLogger('matplotlib.font_manager').setLevel(logging.ERROR)
 
 class ChartWidget(BoxLayout):
     mqtt_server = StringProperty("192.168.1.152")  # MQTT broker address
