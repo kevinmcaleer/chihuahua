@@ -6,12 +6,15 @@ from kivy.uix.label import Label
 from kivy.graphics import Color, Rectangle
 from kivy.logger import Logger
 import logging
+from rounded import RoundedRectangleContainer
+from kivy.uix.gridlayout import GridLayout
 
 Logger.setLevel(logging.INFO)  # Set the log level to INFO
 
 class NewsWidget(BoxLayout):
     rss_url = StringProperty("https://rss.cnn.com/rss/edition.rss")  # Default RSS feed URL
     headlines = ListProperty([])  # List to store fetched headlines
+    
 
     def __init__(self, **kwargs):
         super(NewsWidget, self).__init__(**kwargs)
@@ -20,6 +23,7 @@ class NewsWidget(BoxLayout):
         self.spacing = 10
 
         print(f"Fetching news from {self.rss_url}")
+
 
     def on_rss_url(self, instance, value):
         """Triggered when the rss_url property changes."""
@@ -59,3 +63,4 @@ class NewsWidget(BoxLayout):
                 # label.bind(pos=lambda instance, value: setattr(instance.canvas.before.children[0], 'pos', value))
 
             self.add_widget(label)
+        

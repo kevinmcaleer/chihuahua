@@ -5,6 +5,7 @@ from kivy.clock import Clock
 from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.logger import Logger
+from kivy.uix.gridlayout import GridLayout
 import os
 import requests
 
@@ -13,6 +14,7 @@ class WeatherWidget(BoxLayout):
     api_key = StringProperty("")     # OpenWeatherMap API key
     temperature = NumericProperty(0)  # Current temperature
     icon_url = StringProperty("")    # URL for the weather icon
+    temperature_font_size = NumericProperty(120)  # Default font size for time
 
     def __init__(self, **kwargs):
         super(WeatherWidget, self).__init__(**kwargs)
@@ -21,16 +23,20 @@ class WeatherWidget(BoxLayout):
         self.spacing = 10
 
         # Add UI components
-        self.label = Label(text="Fetching weather...", size_hint=(1, 0.3), font_size=80)
-        self.icon = Image(size_hint=(1, 0.7))  # Weather icon
+        self.label = Label(text="Fetching weather...", size_hint=(1, 1), font_size=80, halign="left")
+        self.icon = Image(size_hint=(None, None))  # Weather icon
         # self.icon.pos_hint = {"center_x": 0.5, "center_y": 0.5}
         
-        self.add_widget(self.label)
-        self.add_widget(self.icon)
+        grid = GridLayout(cols=2, spacing=10, padding=10)
+        grid.add_widget(self.icon)
+        grid.add_widget(self.label)
+        self.add_widget(grid)
 
         # Fetch weather on initialization and every 10 minutes
         self.fetch_weather()
         Clock.schedule_interval(lambda dt: self.fetch_weather(), 600)
+
+        self.bind(size=self.update_temp_size)
 
     def on_api_key(self, instance, value):
         """Triggered when the api_key property changes."""
@@ -96,4 +102,11 @@ class WeatherWidget(BoxLayout):
         except Exception as e:
             Logger.error(f"WeatherWidget: Exception occurred while fetching icon - {e}")
             self.icon.source = "default_icon.png"  # Set a fallback icon
+
+    def update_temp_size(self, *args):
+        """Update font size and icon size dynamically."""
+        if self.label:
+            self.label.font_size = self.width * 0.1
+        if self.icon:
+            self.icon.size = (self.width * 0.3, self.height * 0.3)  # Scale icon size dynamically
 

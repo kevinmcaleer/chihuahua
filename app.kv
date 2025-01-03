@@ -3,31 +3,87 @@
 <MenuScreen>:
     Image:
         source: 'background.jpg'
-            
-    BoxLayout:
-        BoxLayout:
-            orientation: 'vertical'
+        allow_stretch: True
+        keep_ratio: True
+        size_hint: None, None
+        size: 
+            (self.parent.width, self.parent.width / self.image_ratio) \
+            if self.image_ratio < self.parent.width / self.parent.height \
+            else (self.parent.height * self.image_ratio, self.parent.height)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    GridLayout:
+        cols:1
+        GridLayout:
+            row_force_default: True
+            row_default_height: 70
+            cols: 5
+            spacing: 10
+            padding: 20
+            Button:
+                text: 'Home'
+                background_color: 0, 0, 0, 0.2  # Fully transparent background
+                background_normal: ''  # Remove the default button background image
+            Button:
+                text: 'Weather'
+                background_color: 0, 0, 0, 0.2  # Fully transparent background
+                background_normal: ''  # Remove the default button background image
+                on_press:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'weather'
+            Button:
+                text: 'News'
+                background_color: 0, 0, 0, 0.2  # Fully transparent background
+                background_normal: ''  # Remove the default button background image
+                on_press:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'news'
+            Button: 
+                text: 'Smart Home'
+                background_color: 0, 0, 0, 0.2  # Fully transparent background
+                background_normal: ''  # Remove the default button background image
+            Button:
+                text: 'Quit'
+                background_color: 0, 0, 0, 0.2  # Fully transparent background
+                background_normal: ''  # Remove the default button background image
+                on_press: app.stop()
+        GridLayout:
+            cols: 3
+            spacing: 10
+            padding: 20
+            RoundedRectangleContainer: # Clock and Weather
+                orientation: 'horizontal'
+                size_hint_x: 3
+                background_color: 0,0.5,0.8,0.8
+                ClockWidget:
+                    time_font_size: 200
+                    date_font_size: 100
+                    color: 1,0,0
+                WeatherWidget:
+                    city: "Bolton, GB"
+                    api_key: "05f6c0bb861133cce2a23457c0a7c6b2"
             Label:
-                text: 'this on top'
-            ClockWidget:
-                time_font_size: 200
-                date_font_size: 1000
-                color: 1,0,0
-            WeatherWidget:
-                city: "Bolton, GB"
-                api_key: "05f6c0bb861133cce2a23457c0a7c6b2"
-        Button:
-            text: 'Goto settings'
-            on_press:
-                root.manager.transition.direction = 'left'
-                root.manager.current = 'settings'
-            background_color: 1, 1, 1, 0  # Fully transparent background
-            background_normal: ''  # Remove the default button background image
-        ChartWidget:
-            mqtt_server: '192.168.1.152'
-            mqtt_topic: "/home/loft"
-            min_range: 0
-            max_range: 40
+               
+<SettingsScreen>:
+    BoxLayout:
+        orientation: 'horizontal'
+        GridLayout:
+            Button:
+                text: 'File'
+            Button:
+                text: 'Edit'
+            Button:
+                text: 'Settings'
+            Button:
+                text: 'Quit'
+                # background_color: 1, 1, 1, 0  # Fully transparent background
+                # background_normal: ''  # Remove the default button background image
+                on_press: app.stop()
+        MenuBar:
+            height: 200
+    GridLayout:
+        cols : 3
+        spacing: 10
+        padding: 20
         Button:
             text: 'Test page'
             on_press:
@@ -47,43 +103,37 @@
             background_color: 1, 1, 1, 0  # Fully transparent background
             background_normal: ''  # Remove the default button background image
             on_press: app.stop()
-                    
-<SettingsScreen>:
-    BoxLayout:
-        ClockWidget:
-            time_font_size: 120
-            date_font_size: 120
-        Button:
-            text: 'My settings button'
-        Button:
-            text: 'Back to menu'
-            on_press:
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'menu'
-<TestScreen>:
+        RoundedRectangleContainer: # Clock and Weather
+            orientation: 'horizontal'
+            size_hint_x: 3
+            background_color: 1,0,0
+            ClockWidget:
+                time_font_size: 200
+                date_font_size: 100
+                color: 1,0,0
+            WeatherWidget:
+                city: "Bolton, GB"
+                api_key: "05f6c0bb861133cce2a23457c0a7c6b2"
+        
+        ChartWidget:
+            mqtt_server: '192.168.1.152'
+            mqtt_topic: "/home/loft"
+            min_range: 0
+            max_range: 40
+<NewsScreen>:
     GridLayout:
-        size_hint: .9, .9
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        rows:1
-        Label:
-            text: "I don't suffer from insanity, I enjoy every minute of it"
-            text_size: self.width-20, self.height-20
-            valign: 'top'
-        Label:
-            text: "When I was born I was so surprised; I didn't speak for a year and a half."
-            text_size: self.width-20, self.height-20
-            valign: 'middle'
-            halign: 'center'
-        Label:
-            text: "A consultant is someone who takes a subject you understand and makes it sound confusing"
-            text_size: self.width-20, self.height-20
-            valign: 'bottom'
-            halign: 'justify'
+        cols: 5
+        padding: 10
+        spacing: 10
+        NewsWidget:
+            size_hint_x: 4
+            rss_url: "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml"  # Example RSS feed
         Button:
             text: 'Back to menu'
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
+        
 <WeatherScreen>:
     BoxLayout:
         Gauge:
