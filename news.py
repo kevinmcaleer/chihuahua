@@ -11,20 +11,21 @@ from kivy.uix.gridlayout import GridLayout
 
 Logger.setLevel(logging.INFO)  # Set the log level to INFO
 
-class NewsWidget(BoxLayout):
+class NewsWidget(GridLayout):
     rss_url = StringProperty("https://rss.cnn.com/rss/edition.rss")  # Default RSS feed URL
     headlines = ListProperty([])  # List to store fetched headlines
+    cols = 1
     
 
     def __init__(self, **kwargs):
         super(NewsWidget, self).__init__(**kwargs)
-        self.orientation = "vertical"
+        # self.orientation = "vertical"
         self.padding = 10
         self.spacing = 10
+        self.center_x = 0.5
 
         print(f"Fetching news from {self.rss_url}")
-
-
+        
     def on_rss_url(self, instance, value):
         """Triggered when the rss_url property changes."""
         Logger.info(f"RSS URL updated to: {value}")
@@ -54,13 +55,15 @@ class NewsWidget(BoxLayout):
             label = Label(text=headline, size_hint_y=None, height=50, halign="left", valign="middle")
             label.bind(size=label.setter('text_size'))  # Proper alignment
             label.color = (1, 1, 1, 1)  # White text color
+            label.size_hint = (5, 1)
 
             # Add a background color to the label using Canvas
             with label.canvas.before:
                 Color(0.2, 0.2, 0.2, 1)  # Dark grey background
-                Rectangle(size=label.size, pos=label.pos)
-                # label.bind(size=lambda instance, value: setattr(instance.canvas.before.children[0], 'size', value))
-                # label.bind(pos=lambda instance, value: setattr(instance.canvas.before.children[0], 'pos', value))
+                rect = Rectangle(size=label.size, pos=label.pos)
+
+            # Bind size and position updates to the Rectangle
+            label.bind(size=lambda instance, value: setattr(rect, 'size', value))
+            label.bind(pos=lambda instance, value: setattr(rect, 'pos', value))
 
             self.add_widget(label)
-        

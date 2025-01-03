@@ -120,19 +120,44 @@
             mqtt_topic: "/home/loft"
             min_range: 0
             max_range: 40
-<NewsScreen>:
+<NewsScreen>: 
     GridLayout:
         cols: 5
         padding: 10
         spacing: 10
-        NewsWidget:
-            size_hint_x: 4
-            rss_url: "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml"  # Example RSS feed
+
+        GridLayout:
+            cols: 4
+            size_hint_x: 4  # This nested grid takes up the first 4 columns
+            size_hint_y: 1  # Stretches to fill the screen height
+            spacing: 10
+            padding: 10
+
+            RoundedRectangleContainer:
+                size_hint: 4, None  # Allow explicit height control
+                height: 100  # Set a fixed height for the container
+                background_color: 1, 0, 0, 1
+                Label:
+                    text: 'News'
+                    font_size: 40
+                    halign: 'left'
+                    valign: 'middle'
+                    text_size: self.size
+
+            NewsWidget:
+                size_hint: 4, None  # Ensure it spans the remaining space
+                rss_url: "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml"
+
         Button:
             text: 'Back to menu'
+            size_hint_x: 1  # Disable horizontal stretching
+            size_hint_y: 1  # Enable vertical stretching to fill height
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
+
+
+
         
 <WeatherScreen>:
     BoxLayout:
