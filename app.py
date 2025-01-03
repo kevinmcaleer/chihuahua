@@ -13,6 +13,7 @@ from kivy.uix.widget import Widget
 from kivy.graphics import RoundedRectangle, Color
 from rounded import RoundedRectangleContainer
 
+
 Logger.setLevel(level='INFO')  # Set the log level to INFO
 logging.basicConfig(level=logging.WARNING)
 
@@ -35,6 +36,8 @@ class NewsScreen(Screen):
 class WeatherScreen(Screen):
     pass
 
+class SmartHomeScreen(Screen):
+    pass
 
 class RoundedButton(Widget):
     def __init__(self, text, **kwargs):
@@ -63,6 +66,7 @@ class TestApp(App):
         sm.add_widget(SettingsScreen(name='settings'))
         sm.add_widget(NewsScreen(name='news'))
         sm.add_widget(WeatherScreen(name='weather'))
+        sm.add_widget(SmartHomeScreen(name='smarthome'))
 
         return sm
 

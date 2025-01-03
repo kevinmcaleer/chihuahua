@@ -41,6 +41,9 @@
                 text: 'Smart Home'
                 background_color: 0, 0, 0, 0.2  # Fully transparent background
                 background_normal: ''  # Remove the default button background image
+                on_press:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'smarthome'
             Button:
                 text: 'Quit'
                 background_color: 0, 0, 0, 0.2  # Fully transparent background
@@ -126,16 +129,18 @@
         padding: 10
         spacing: 10
 
+        # Left Section: Title + News Items
         GridLayout:
-            cols: 4
-            size_hint_x: 4  # This nested grid takes up the first 4 columns
+            cols: 1
+            size_hint_x: 4  # This section takes up the first 4 columns
             size_hint_y: 1  # Stretches to fill the screen height
             spacing: 10
             padding: 10
 
+            # Title (Top Row)
             RoundedRectangleContainer:
-                size_hint: 4, None  # Allow explicit height control
-                height: 100  # Set a fixed height for the container
+                size_hint: 1, None  # Full width of its parent
+                height: 100  # Fixed height for the title
                 background_color: 1, 0, 0, 1
                 Label:
                     text: 'News'
@@ -144,10 +149,12 @@
                     valign: 'middle'
                     text_size: self.size
 
+            # News Items (Bottom Row)
             NewsWidget:
-                size_hint: 4, None  # Ensure it spans the remaining space
+                size_hint: 1, 1  # Fill remaining vertical space
                 rss_url: "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml"
 
+        # Right Section: Back Button
         Button:
             text: 'Back to menu'
             size_hint_x: 1  # Disable horizontal stretching
@@ -155,6 +162,7 @@
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
+
 
 
 
@@ -174,4 +182,23 @@
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
-            
+
+<SmartScreen>:
+    BoxLayout:
+        Gauge:
+            title: 'Loft'
+            mqtt_server: '192.168.1.152'
+            mqtt_topic: "/home/loft"
+            min_range: 0
+            max_range: 40
+        ChartWidget:
+            title: 'Loft'
+            mqtt_server: '192.168.1.152'
+            mqtt_topic: "/home/loft"
+            min_range: 0
+            max_range: 40
+        Button:
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
