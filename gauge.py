@@ -6,7 +6,6 @@ from kivy_garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 from kivy.clock import Clock
 import paho.mqtt.client as mqtt
 
-
 class Gauge(BoxLayout):
     current_value = NumericProperty(50)  # Default value for the gauge
     min_value = NumericProperty(0)       # Minimum range for the gauge

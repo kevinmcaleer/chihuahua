@@ -78,8 +78,6 @@ class WeatherWidget(BoxLayout):
             Logger.error(f"WeatherWidget: Exception occurred - {e}")
             self.label.text = "Error fetching weather"
 
-  
-
     def update_ui(self):
         """Update the UI with the current temperature and icon."""
         self.label.text = f"{self.temperature}°C"
@@ -109,4 +107,3 @@ class WeatherWidget(BoxLayout):
             self.label.font_size = self.width * 0.1
         if self.icon:
             self.icon.size = (self.width * 0.3, self.height * 0.3)  # Scale icon size dynamically
-
