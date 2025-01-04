@@ -183,21 +183,60 @@
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
 
-<SmartScreen>:
-    BoxLayout:
-        Gauge:
-            title: 'Loft'
-            mqtt_server: '192.168.1.152'
-            mqtt_topic: "/home/loft"
-            min_range: 0
-            max_range: 40
-        ChartWidget:
-            title: 'Loft'
-            mqtt_server: '192.168.1.152'
-            mqtt_topic: "/home/loft"
-            min_range: 0
-            max_range: 40
+<SmartHomeScreen>:
+    Image:
+        source: 'background.jpg'
+        allow_stretch: True
+        keep_ratio: True
+        size_hint: None, None
+        size: 
+            (self.parent.width, self.parent.width / self.image_ratio) \
+            if self.image_ratio < self.parent.width / self.parent.height \
+            else (self.parent.height * self.image_ratio, self.parent.height)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    GridLayout:
+        cols: 5
+        rows: 1
+        GridLayout:
+            cols: 3
+            rows: 2
+            size_hint_x: 4
+            spacing: 20
+            padding: 20
+            row_force_default: True  # Force all rows to have the same height
+            row_default_height: self.height / self.rows  # Set row height dynamically
+
+            ChartWidget:
+                title: 'Loft'
+                size_hint_y: None  # Height controlled by the row_default_height
+                height: self.parent.row_default_height
+                mqtt_server: '192.168.1.152'
+                mqtt_topic: "/home/loft"
+                min_range: -10
+                max_range: 40
+                background_color: 0, 0, 0, 0.5
+            
+            ChartWidget:
+                size_hint_y: None  # Height controlled by the row_default_height
+                height: self.parent.row_default_height
+                title: 'RobotLab'
+                mqtt_server: '192.168.1.152'
+                mqtt_topic: "/home/robotlab"
+                min_range: -10
+                max_range: 40
+                background_color: 0, 0, 0, 0.5
+
+            ChartWidget:
+                size_hint_y: None  # Height controlled by the row_default_height
+                height: self.parent.row_default_height
+                title: 'Outside'
+                mqtt_server: '192.168.1.152'
+                mqtt_topic: "/home/outside"
+                min_range: -10
+                max_range: 40
+
         Button:
+            size_hint_x: 1
             text: 'Back to menu'
             on_press:
                 root.manager.transition.direction = 'right'
