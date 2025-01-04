@@ -22,6 +22,10 @@ import kivy
 # Set Kivy log level
 kivy.config.Config.set('kivy', 'log_level', 'warning')  # Suppress debug messages
 kivy.config.Config.write()
+kivy.config.Config.set('graphics', 'borderless', '1')
+kivy.config.Config.set('graphics', 'fullscreen', '1')
+kivy.config.Config.write()
+
 
 # Declare screens
 class MenuScreen(Screen):
