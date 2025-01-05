@@ -57,7 +57,6 @@ class RoundedButton(Widget):
         self.rect.size = self.size
         self.rect.pos = self.pos
 
-
 class TestApp(App):
 
     def build(self):

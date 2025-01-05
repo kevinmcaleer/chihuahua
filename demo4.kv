@@ -1,0 +1,28 @@
+<FirstScreen>:
+    Image:
+        source: 'background.png'
+
+        # Add this after showing background image
+        allow_stretch: True
+        keep_ratio: True
+        size_hint: None, None
+        size: 
+            (self.parent.width, self.parent.width / self.image_ratio) \
+            if self.image_ratio < self.parent.width / self.parent.height \
+            else (self.parent.height * self.image_ratio, self.parent.height)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    Button: 
+        text: 'To screen two'
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'second'
+        background_color: 0, 0, 0, 0.2  # Fully transparent background
+        background_normal: ''  # Remove the default button background image
+    ClockWidget:
+
+<SecondScreen>:
+    Button:
+        text: 'back to screen One'
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'first'
