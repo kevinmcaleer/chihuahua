@@ -65,7 +65,7 @@ class WeatherWidget(BoxLayout):
             # print(f'response: {response}')
             if response.status_code == 200:
                 data = response.json()
-                self.temperature = data["main"]["temp"]
+                self.temperature = round(data["main"]["temp"],1)
                 icon_code = data["weather"][0]["icon"]
                 self.icon_url = f"http://openweathermap.org/img/wn/{icon_code}@2x.png"
                 print(f"Temperature: {self.temperature}°C")
