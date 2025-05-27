@@ -15,7 +15,6 @@ class NewsWidget(GridLayout):
     rss_url = StringProperty("https://rss.cnn.com/rss/edition.rss")  # Default RSS feed URL
     headlines = ListProperty([])  # List to store fetched headlines
     cols = 1
-    
 
     def __init__(self, **kwargs):
         super(NewsWidget, self).__init__(**kwargs)
@@ -25,7 +24,7 @@ class NewsWidget(GridLayout):
         self.center_x = 0.5
 
         print(f"Fetching news from {self.rss_url}")
-        
+
     def on_rss_url(self, instance, value):
         """Triggered when the rss_url property changes."""
         Logger.info(f"RSS URL updated to: {value}")

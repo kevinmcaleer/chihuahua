@@ -1,0 +1,88 @@
+<FirstScreen>:
+    Image:
+        source: 'background.png'
+        allow_stretch: True
+        keep_ratio: True
+        size_hint: None, None
+        size:
+            (self.parent.width, self.parent.width / self.image_ratio) \ 
+            if self.image_ratio < self.parent.width / self.parent.height \ 
+            else (self.parent.height * self.image_ratio, self.parent.height)
+        pos_hint: {'center_x':0.5, 'center_y': 0.5 }
+    GridLayout:
+        rows: 3
+        cols: 3
+        ClockWidget:
+            size_hint_x: 2
+            color: 1,0,0
+        Button:
+            text: 'To screen Three'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'third'
+            background_color: 0,0,0,0.2 
+            background_normal: '' # remove the default button background image
+        Button:
+            text: 'To screen two'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'second'
+            background_color: 0,0,0,0.2 
+            background_normal: '' # remove the default button background image
+<SecondScreen>:
+    GridLayout:
+        cols: 3
+        rows: 1
+        NewsWidget:
+            size_hint_x: 2
+            rss_url: "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml"
+
+    Button:
+        size_hint_x: 1
+        text: '< Back to screen one'
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'first'
+        background_color: 0,0,0,0.2 
+        background_normal: '' # remove the default button background image
+
+<ThirdScreen>:
+    GridLayout:
+        cols: 3
+        row: 3
+
+        ChartWidget:
+            mqtt_topic: '/home/loft'
+            background_color: 1,0,0,0.2
+            min_range: -10
+            max_range: 40
+            title: 'Loft Temp'
+
+        ChartWidget:
+            mqtt_topic: '/home/loft'
+            background_color: 1,0,0,0.2
+            min_range: -10
+            max_range: 40
+            title: 'Loft Temp'
+        ChartWidget:
+            mqtt_topic: '/home/loft'
+            background_color: 1,0,0,0.2
+            min_range: -10
+            max_range: 40
+            title: 'Loft Temp'
+            
+        ChartWidget:
+            mqtt_topic: '/home/loft'
+            background_color: 1,0,0,0.2
+            min_range: -10
+            max_range: 40
+            title: 'Loft Temp'
+
+        Button:     
+            size_hint_x: 1
+            text: '< Back to screen one'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'first'
+            background_color: 0,0,0,0.2 
+            background_normal: '' # remove the default button background image

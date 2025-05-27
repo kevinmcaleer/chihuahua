@@ -3,7 +3,6 @@ from kivy.uix.widget import Widget
 from kivy.graphics import Rectangle, Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-
 from clock import ClockWidget  # Import ClockWidget from the separate file
 
 class MyWidget(BoxLayout):  # Change to BoxLayout to support layout widgets

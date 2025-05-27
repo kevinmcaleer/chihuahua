@@ -13,7 +13,6 @@ from kivy.uix.widget import Widget
 from kivy.graphics import RoundedRectangle, Color
 from rounded import RoundedRectangleContainer
 
-
 Logger.setLevel(level='INFO')  # Set the log level to INFO
 logging.basicConfig(level=logging.WARNING)
 
@@ -23,7 +22,7 @@ import kivy
 kivy.config.Config.set('kivy', 'log_level', 'warning')  # Suppress debug messages
 kivy.config.Config.write()
 kivy.config.Config.set('graphics', 'borderless', '1')
-kivy.config.Config.set('graphics', 'fullscreen', '1')
+kivy.config.Config.set('graphics', 'fullscreen', '0')
 kivy.config.Config.write()
 
 
@@ -56,7 +55,6 @@ class RoundedButton(Widget):
     def update_rect(self, *args):
         self.rect.size = self.size
         self.rect.pos = self.pos
-
 
 class TestApp(App):
 

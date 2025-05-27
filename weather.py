@@ -65,7 +65,7 @@ class WeatherWidget(BoxLayout):
             # print(f'response: {response}')
             if response.status_code == 200:
                 data = response.json()
-                self.temperature = data["main"]["temp"]
+                self.temperature = round(data["main"]["temp"],1)
                 icon_code = data["weather"][0]["icon"]
                 self.icon_url = f"http://openweathermap.org/img/wn/{icon_code}@2x.png"
                 print(f"Temperature: {self.temperature}°C")
@@ -77,8 +77,6 @@ class WeatherWidget(BoxLayout):
         except Exception as e:
             Logger.error(f"WeatherWidget: Exception occurred - {e}")
             self.label.text = "Error fetching weather"
-
-  
 
     def update_ui(self):
         """Update the UI with the current temperature and icon."""
@@ -109,4 +107,3 @@ class WeatherWidget(BoxLayout):
             self.label.font_size = self.width * 0.1
         if self.icon:
             self.icon.size = (self.width * 0.3, self.height * 0.3)  # Scale icon size dynamically
-

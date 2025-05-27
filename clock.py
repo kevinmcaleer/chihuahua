@@ -18,14 +18,6 @@ class ClockWidget(BoxLayout):
         self.padding = 20
         self.spacing = 10
 
-        # Add a rounded rectangle background
-        # with self.canvas.before:
-        #     Color(0.1, 0.5, 0.8, 0.2)  # Blue background
-        #     self.rect = RoundedRectangle(size=self.size, pos=self.pos, radius=[20])
-
-        # Bind size and position updates to the background
-        # self.bind(size=self._update_rect, pos=self._update_rect)
-
         # Add a label to display the date
         self.date_label = Label(font_size=self.date_font_size, halign="left", valign="bottom")
         self.date_label.bind(size=self.date_label.setter('text_size'))  # Ensure proper alignment

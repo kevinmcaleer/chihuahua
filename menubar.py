@@ -30,34 +30,3 @@ class MenuBar(BoxLayout):
 
     def on_help(self, instance):
         print("Help menu clicked")
-
-    # def build(self):
-    #     root = BoxLayout(orientation="vertical")
-
-    #     # Add the menu bar
-    #     menu_bar = MenuBar()
-    #     root.add_widget(menu_bar)
-
-    #     # Add main content area
-    #     content = Label(text="Main content area")
-    #     root.add_widget(content)
-
-    #     return root
-
-# class MyApp(App):
-#     def build(self):
-#         root = BoxLayout(orientation="vertical")
-
-#         # Add the menu bar
-#         menu_bar = MenuBar()
-#         root.add_widget(menu_bar)
-
-#         # Add main content area
-#         content = Label(text="Main content area")
-#         root.add_widget(content)
-
-#         return root
-
-
-# if __name__ == "__main__":
-#     MyApp().run()

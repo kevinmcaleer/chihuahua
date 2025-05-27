@@ -110,24 +110,11 @@ class ChartWidget(BoxLayout):
         except ValueError:
             print("Invalid payload received, expected a float")
 
-    # def update_plot(self):
-    #     """Update the chart with new data."""
-    #     self.ax.clear()
-    #     self.ax.set_ylim(self.min_range, self.max_range)
-    #     self.ax.plot(self.data_points, label="MQTT Data")
-    #     self.ax.legend()
-    #     self.ax.set_title("Real-time Data")
-    #     self.ax.set_xlabel("Time")
-    #     self.ax.set_ylabel("Value")
-    #     self.canvas_widget.draw()
-
     def update_plot(self):
         """Update the chart with new data."""
         self.ax.clear()
         self.ax.set_facecolor((0, 0, 0, 0))  # Ensure transparent axes background
         self.ax.set_ylim(self.min_range, self.max_range)
-
-        
 
         # Plot the data with a white line
         self.ax.plot(self.data_points, label="MQTT Data", color="white")
@@ -146,7 +133,6 @@ class ChartWidget(BoxLayout):
         # Redraw the canvas
         self.canvas_widget.draw()
 
-    
     def update_title(self, *args):
         """Update the chart title."""
         self.ax.set_title(self.title)
